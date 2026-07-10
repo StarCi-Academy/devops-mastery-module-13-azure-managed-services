@@ -1,8 +1,8 @@
 # providers.tf — Azure Storage Account + Blob: access tier (Hot/Cool/Archive), lifecycle, versioning.
-# Day la bai dau cua module Azure managed services. Storage Account la "tai khoan" chua blob/file/queue/table;
-# trong bai nay ta tap trung Blob: tao container, day mot blob, dat access tier, bat versioning,
-# va dung management policy de tu dong chuyen tier Hot -> Cool -> Archive -> delete theo tuoi blob.
-# Provider azurerm xac thuc qua Entra ID (service principal qua ARM_* hoac az login). KHONG hardcode credential.
+# This is the opening lesson of the Azure managed services module. A Storage Account is the "account" that holds blob/file/queue/table;
+# in this lesson we focus on Blob: create a container, push one blob, set an access tier, enable versioning,
+# and use a management policy to auto-move tiers Hot -> Cool -> Archive -> delete by blob age.
+# The azurerm provider authenticates via Entra ID (service principal through ARM_* or az login). Never hardcode credentials.
 terraform {
   required_version = ">= 1.5"
   required_providers {
@@ -13,10 +13,10 @@ terraform {
   }
 }
 
-# features {} la block BAT BUOC cua azurerm. provider dò credential theo thu tu:
-#   1. bien moi truong ARM_CLIENT_ID/ARM_CLIENT_SECRET/ARM_TENANT_ID/ARM_SUBSCRIPTION_ID (service principal)
-#   2. Azure CLI da `az login` (developer local)
-#   3. Managed Identity (khi chay tren tai nguyen Azure)
+# features {} is the MANDATORY azurerm block. The provider resolves credentials in this order:
+#   1. environment variables ARM_CLIENT_ID/ARM_CLIENT_SECRET/ARM_TENANT_ID/ARM_SUBSCRIPTION_ID (service principal)
+#   2. Azure CLI after `az login` (developer local)
+#   3. Managed Identity (when running on an Azure resource)
 provider "azurerm" {
   features {}
 }

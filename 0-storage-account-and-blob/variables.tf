@@ -1,24 +1,24 @@
-# variables.tf — tham so hoa vi tri, tien to ten, va tier mac dinh cua blob.
+# variables.tf — parameterize the location, name prefix, and the sample blob's default tier.
 variable "location" {
-  description = "Azure region noi Resource Group + Storage Account ton tai (vd southeastasia, eastus)."
+  description = "Azure region where the Resource Group + Storage Account live (e.g. southeastasia, eastus)."
   type        = string
   default     = "southeastasia"
 }
 
 variable "name_prefix" {
-  description = "Tien to dat truoc ten RG va storage account de tranh trung khi nhieu hoc vien chung 1 subscription. Chi chu thuong + so."
+  description = "Prefix placed before the RG and storage account names to avoid collisions when many learners share one subscription. Lowercase letters + digits only."
   type        = string
   default     = "starci"
 }
 
 variable "storage_account_suffix" {
-  description = "Hau to ngau nhien cho ten storage account — ten storage account phai DUY NHAT toan cau (3-24 ky tu, chi chu thuong + so)."
+  description = "Random suffix for the storage account name — the storage account name must be GLOBALLY UNIQUE (3-24 chars, lowercase letters + digits only)."
   type        = string
   default     = "blob01"
 }
 
 variable "blob_access_tier" {
-  description = "Access tier cho blob upload mau: Hot (truy cap thuong xuyen), Cool, hoac Archive (re nhat, can rehydrate)."
+  description = "Access tier for the sample uploaded blob: Hot (frequent access), Cool, or Archive (cheapest, needs rehydration)."
   type        = string
   default     = "Cool"
 }

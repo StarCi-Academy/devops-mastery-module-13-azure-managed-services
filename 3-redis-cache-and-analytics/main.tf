@@ -28,7 +28,7 @@ resource "azurerm_managed_redis" "main" {
   name                  = "starci-redis-lab"
   resource_group_name   = azurerm_resource_group.lab.name
   location              = azurerm_resource_group.lab.location
-  sku_name              = var.redis_sku_name      # e.g. Balanced_B0
+  sku_name              = var.redis_sku_name # e.g. Balanced_B0
   public_network_access = "Enabled"
 
   # default_database configures the built-in database (DB 0). Eviction policy
