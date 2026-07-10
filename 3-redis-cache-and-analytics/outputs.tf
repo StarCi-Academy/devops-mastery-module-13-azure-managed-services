@@ -5,12 +5,17 @@ output "resource_group_name" {
 }
 
 output "redis_hostname" {
-  description = "The hostname of the Managed Redis instance — connect with redis-cli -h <hostname> -p <port> --tls."
+  description = "DNS name of the Managed Redis cluster endpoint — connect with redis-cli -h <hostname> -p <port> --tls."
   value       = azurerm_managed_redis.main.hostname
 }
 
+output "redis_port" {
+  description = "TCP port of the database endpoint. Managed Redis uses a single TLS port (10000), not the legacy 6379/6380 split."
+  value       = azurerm_managed_redis.main.default_database[0].port
+}
+
 output "redis_primary_access_key" {
-  description = "Primary access key for DB 0 (the password). Marked sensitive so it is not printed in plan/apply logs."
+  description = "Primary access key for DB 0 (the password). Marked sensitive so it is not printed in plan/apply logs. Only populated when access_keys_authentication_enabled = true."
   value       = azurerm_managed_redis.main.default_database[0].primary_access_key
   sensitive   = true
 }

@@ -1,8 +1,8 @@
-# providers.tf — terraform block + AzureRM provider for the Azure Cache for Redis
-# lesson. This lesson provisions a REAL managed Redis instance: an azurerm_redis_cache
-# (tier/capacity via sku_name + family + capacity, TLS-only, eviction policy via the
-# redis_configuration block) and an azurerm_redis_firewall_rule that allows a single
-# operator IP range. Analytics (Azure Synapse) is intentionally DEFERRED — see §2.2.
+# providers.tf — terraform block + AzureRM provider for the Azure Managed Redis lesson.
+# This lesson provisions a REAL Azure Managed Redis instance (azurerm_managed_redis): the
+# tier is a single sku_name string (e.g. Balanced_B0), TLS is forced via the
+# default_database client_protocol, eviction via the default_database eviction_policy, and
+# network exposure via public_network_access (there is NO separate firewall-rule resource).
 # `terraform fmt/validate/init` run offline; `plan/apply` need Azure credentials
 # (see .e2e/agnostic/*-require-creds.md).
 
